@@ -87,13 +87,7 @@ class TaskListViewController: UITableViewController {
         let cellIndex = IndexPath(row: taskList.count - 1, section: 0)
         tableView.insertRows(at: [cellIndex], with: .automatic)
         
-        if viewContext.hasChanges {
-            do {
-                try viewContext.save()
-            } catch let error {
-                print(error.localizedDescription)
-            }
-        }
+        StorageManager.shared.saveContext()
     }
     
     private func update(_ taskName: String, didSelectRowAt indexPath: IndexPath) {
@@ -102,13 +96,7 @@ class TaskListViewController: UITableViewController {
         
         tableView.reloadRows(at: [indexPath], with: .automatic)
         
-        if viewContext.hasChanges {
-            do {
-                try viewContext.save()
-            } catch let error {
-                print(error.localizedDescription)
-            }
-        }
+        StorageManager.shared.saveContext()
     }
     
 }
